@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/mitesh4000/AOC/utils"
 	"strconv"
 	"strings"
+
+	"github.com/mitesh4000/AOC/utils"
 )
 
 func main() {
-
 	fileOutput, err := utils.ReadFile("ip_day1.txt")
-
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -43,4 +42,4 @@ loopOtherNum:
 	}
 
 	fmt.Println("result: ", result)
-
+}
