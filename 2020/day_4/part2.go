@@ -2,78 +2,34 @@ package main
 
 import (
 	"fmt"
-	"regexp"
-	"slices"
 	"strings"
 
 	"github.com/mitesh4000/AOC/utils"
 )
 
 func Part2() {
-	input, err := utils.ReadFile("ip.text")
+	input, err := utils.ReadFile("ip_test.text")
+	fmt.Println(err)
 	if err != nil {
-		fmt.Println(err)
-	}
-	passports := strings.Split(strings.TrimSpace(input), "\n\n")
-	validPassCount := 0
-
-	type field struct {
-		byr int
-		iyr int
-		eyr int
-		hgt string
-		hcl int
-		ecl int
-		pid int
 	}
 
-	fields := []string{
-		"byr",
-		"iyr",
-		"eyr",
-		"hgt",
-		"hcl",
-		"ecl",
-		"pid",
-	}
-	fmt.Println(fields)
+	passPortList := strings.Split(input, "\n\n")
 
-mainLoop:
-	for index, passport := range passports {
-		passport = strings.ReplaceAll(passport, "\n", " ")
-		passportSlice := strings.Split(passport, " ")
-
-		if len(passportSlice) < len(fields) {
-			continue mainLoop
-		}
-		passportKeys := []string{}
-		passportValues := []string{}
-		for _, passportField := range passportSlice {
-			passportKeys = append(passportKeys, strings.Split(passportField, ":")[0])
-			passportValues = append(passportValues, strings.Split(passportField, ":")[1])
-		}
-
-		for _, requiredField := range fields {
-			fieldExist := slices.Contains(passportKeys, requiredField)
-			if !fieldExist {
-				fmt.Println(index, requiredField)
-				continue mainLoop
-			}
-
-			currentPassportValue := passportValues[slices.Index(passportKeys, requiredField)]
-			if requiredField == "pid" {
-				valid, err := regexp.MatchString(`^abc$`, currentPassportValue)
-				if err != nil {
-					fmt.Println(err)
-				}
-				if !valid {
-					continue mainLoop
-				}
-			}
-		}
-		validPassCount += 1
-		fmt.Println("-->", passportKeys)
+	type Passport struct {
+		ecl    string
+		pid    string
+		eyr    string
+		intbyr string
+		iyr    string
+		cid    string
+		hgt    string
 	}
 
-	fmt.Println("passportFields -->", validPassCount)
+	for index, passport := range passPortList {
+		var passPortStruct Passport
+
+		fmt.Println(passPortStruct, index)
+	}
+
+	fmt.Println(passPortList)
 }
